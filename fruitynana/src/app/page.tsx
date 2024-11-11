@@ -30,40 +30,41 @@ const WelcomeScreen = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-white relative">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-rose-100 relative">
       {/* Top section */}
       <div className="absolute top-4 left-4">
-        <Image src={banana} alt="Banana Logo" className="w-36 h-36 p-8" />
+        <Image src={banana} alt="Banana Logo" className="w-44 h-44 p-12" />
       </div>
 
-      <div className="absolute top-4 right-4 flex space-x-4 p-8">
-        <div className="w-36 h-36 bg-yellow-400 rounded-full"></div>
-        <div className="w-36 h-36 bg-yellow-400 rounded-full"></div>
-        <div className="w-36 h-36 bg-yellow-400 rounded-full"></div>
+      <div className="absolute top-4 right-4 flex space-x-10 p-8">
+        <div className="w-44 h-44 bg-yellow-400 rounded-full"></div>
+        <div className="w-44 h-44 bg-yellow-400 rounded-full"></div>
+        <div className="w-44 h-44 bg-yellow-400 rounded-full"></div>
       </div>
 
       {/* Main content positioned at bottom-left */}
-      <div className="absolute bottom-0 left-0 p-12">
-        <h1 className="text-[300px] text-black font-regular">Welcome</h1>
+      <div className="absolute bottom-0 left-0 p-12 flex items-center gap-10"> {/* Added flex and gap classes */}
+        <h1 className="text-[350px] text-black font-light ml-10">Welcome</h1>
+        <div>
+          <button
+            onClick={handleButtonClick} // Attach the click handler
+            className="w-44 h-44 border border-black rounded-full flex items-center justify-center hover:bg-yellow-400 hover:scale-75 transition mt-14 ml-20"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="black"
+              className="w-16 h-16"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+        </div>
       </div>
 
+
       {/* Bottom right button */}
-      <div className="absolute bottom-4 right-4 p-12">
-        <button
-          onClick={handleButtonClick} // Attach the click handler
-          className="w-44 h-44 border rounded-full flex items-center justify-center hover:bg-black transition"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="w-16 h-16"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-        </button>
-      </div>
     </div>
   );
 };
