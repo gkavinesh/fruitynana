@@ -1,101 +1,78 @@
-import Image from "next/image";
+"use client"
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation'; // Make sure you are using this correctly in a client component context
+import Image from 'next/image';
+import banana from '@/app/assets/banana.png';
+import Preloader from '../components/preloader/preloader'; // Import the Preloader component
 
-export default function Home() {
+const WelcomeScreen = () => {
+  const [loading, setLoading] = useState(true);
+  const router = useRouter(); // Initialize useRouter
+
+  // Simulate a loading effect (you can adjust the duration or use a real loading trigger)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000); // 3 seconds
+
+    return () => clearTimeout(timer); // Cleanup timer on component unmount
+  }, []);
+
+  const handleButtonClick = () => {
+    // Ensure that the router push only runs in the browser context
+    if (typeof window !== 'undefined') {
+      router.push('/sign-up'); // Navigate to the sign-up page
+    }
+  };
+
+  if (loading) {
+    return <Preloader />;
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white relative">
+      {/* Top section */}
+      <div className="absolute top-4 left-4">
+        <Image src={banana} alt="Banana Logo" className="w-36 h-36 p-8" />
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <div className="absolute top-4 right-4 flex space-x-4 p-8">
+        <div className="w-36 h-36 bg-yellow-400 rounded-full"></div>
+        <div className="w-36 h-36 bg-yellow-400 rounded-full"></div>
+        <div className="w-36 h-36 bg-yellow-400 rounded-full"></div>
+      </div>
+
+      {/* Main content positioned at bottom-left */}
+      <div className="absolute bottom-0 left-0 p-12">
+        <h1 className="text-[300px] text-black font-regular">Welcome</h1>
+      </div>
+
+      {/* Bottom right button */}
+      <div className="absolute bottom-4 right-4 p-12">
+        <button
+          onClick={handleButtonClick} // Attach the click handler
+          className="w-44 h-44 border rounded-full flex items-center justify-center hover:bg-black transition"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className="w-16 h-16"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+      </div>
     </div>
   );
-}
+};
+
+export default WelcomeScreen;
+
+
+
+
+
+
+
