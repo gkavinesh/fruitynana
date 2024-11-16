@@ -30,7 +30,7 @@ const WelcomeScreen = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-rose-100 relative">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white relative">
       {/* Top section */}
       <div className="absolute top-4 left-4">
         <Image src={banana} alt="Banana Logo" className="w-44 h-44 p-12" />
@@ -48,7 +48,7 @@ const WelcomeScreen = () => {
         <div>
           <button
             onClick={handleButtonClick} // Attach the click handler
-            className="w-44 h-44 border border-black rounded-full flex items-center justify-center hover:bg-yellow-400 hover:scale-75 transition mt-14 ml-20"
+            className="w-44 h-44 border border-black rounded-full flex items-center justify-center hover:bg-yellow-400 hover:scale-75 transition mt-14 ml-16"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
