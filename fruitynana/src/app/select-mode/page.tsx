@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import SignUp from '../../components/Authentication/SignUp'; // Adjust the import path based on your folder structure
+import Mode from '../../components/Game/mode';
 import Preloader from '../../components/preloader/preloader'; // Import the Preloader component
 
 const SignUpPage = () => {
@@ -22,7 +22,7 @@ const SignUpPage = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
       <div className="w-full max-w-md">
-        <SignUp />
+        <Mode />
       </div>
     </div>
   );
