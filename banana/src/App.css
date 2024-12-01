@@ -1,42 +1,84 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Welcome Screen Container */
+.welcome-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+  background-color: white;
+}
+
+/* Logo Section */
+.logo-container {
+  position: absolute;
+  top: 16px; /* Equivalent to top-4 in Tailwind */
+  left: 16px; /* Equivalent to left-4 in Tailwind */
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  width: 176px; /* Equivalent to w-44 in Tailwind */
+  height: 176px; /* Equivalent to h-44 in Tailwind */
+  padding: 48px; /* Equivalent to p-12 in Tailwind */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Circle Section */
+.circle-container {
+  position: absolute;
+  top: 16px; /* Equivalent to top-4 in Tailwind */
+  right: 16px; /* Equivalent to right-4 in Tailwind */
+  display: flex;
+  gap: 40px; /* Equivalent to space-x-10 in Tailwind */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.circle {
+  width: 176px; /* Equivalent to w-44 in Tailwind */
+  height: 176px; /* Equivalent to h-44 in Tailwind */
+  background-color: #facc15; /* Tailwind's yellow-400 equivalent */
+  border-radius: 50%; /* Fully round */
 }
 
-.card {
-  padding: 2em;
+/* Main Content */
+.main-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 48px; /* Equivalent to p-12 in Tailwind */
+  display: flex;
+  align-items: center;
+  gap: 40px; /* Equivalent to gap-10 in Tailwind */
 }
 
-.read-the-docs {
-  color: #888;
+.welcome-text {
+  font-size: 224px; /* Equivalent to text-[350px] in Tailwind */
+  color: black;
+  font-weight: 300; /* Equivalent to font-light in Tailwind */
+  margin-left: 40px; /* Equivalent to ml-10 in Tailwind */
 }
+
+/* Button */
+.action-button {
+  width: 176px; /* Equivalent to w-44 in Tailwind */
+  height: 176px; /* Equivalent to h-44 in Tailwind */
+  border: 2px solid black;
+  border-radius: 50%; /* Fully round */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  margin-top: 56px; /* Equivalent to mt-14 in Tailwind */
+  margin-left: 64px; /* Equivalent to ml-16 in Tailwind */
+}
+
+.action-button:hover {
+  background-color: #facc15; /* Yellow hover effect */
+  transform: scale(0.75); /* Scale down on hover */
+}
+
+/* Arrow Icon */
+.arrow-icon {
+  width: 64px; /* Equivalent to w-16 in Tailwind */
+  height: 64px; /* Equivalent to h-16 in Tailwind */
+}
+
+

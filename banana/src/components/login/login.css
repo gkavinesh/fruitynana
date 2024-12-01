@@ -1,0 +1,134 @@
+/* Main Container */
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #ffffff; /* White background */
+  }
+  
+  /* Card for the form */
+  .login-card {
+    width: 400px;
+    padding: 30px;
+    border: 1px solid #ccc; /* Border for the card */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: center;
+  }
+  
+  /* Logo Container */
+  .logo-container-3 {
+    margin-bottom: 20px; /* Add space below the logo */
+    text-align: center;
+  }
+  
+  .banana-logo-2{
+    width: 50px; /* Logo size */
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .app-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  /* Form */
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Input Fields */
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Name Fields Container */
+  .name-fields {
+    display: flex;
+    gap: 10px;
+  }
+  /* Login Button */
+  .login-button {
+    background-color: #facc15; /* Yellow background */
+    border: none;
+    color: #000; /* Black text */
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .login-button:hover {
+    background-color: #e5b809;
+  }
+  
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .divider span {
+    font-size: 12px;
+    color: #888;
+  }
+  
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: #ccc;
+  }
+  
+  /* Google Button */
+  .google-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .google-button:hover {
+    background-color: #f7f7f7;
+  }
+  
+  .google-logo {
+    width: 16px;
+    height: 16px;
+  }
+  
+  /* Sign-Up Link */
+  .signup-link {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #888;
+  }
+  
+  .signup-link a {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  

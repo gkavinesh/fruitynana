@@ -1,0 +1,30 @@
+/* Container to center the spinner */
+.preloader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Full screen height */
+  background-color: white; /* Background color */
+}
+
+/* Spinner styles */
+.spinner {
+  width: 64px; /* Spinner width */
+  height: 64px; /* Spinner height */
+  border: 8px solid #f3f3f3; /* Light gray border */
+  border-top: 8px solid #facc15; /* Yellow border */
+  border-radius: 50%; /* Make it a circle */
+  animation: spin 1s linear infinite; /* Add spinning animation */
+}
+
+/* Keyframes for spinning animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); /* Start at 0 degrees */
+  }
+  100% {
+    transform: rotate(360deg); /* Rotate full circle */
+  }
+}
+
+  

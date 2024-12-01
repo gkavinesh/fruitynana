@@ -1,0 +1,78 @@
+/* Main Container */
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 95vh;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Banana Logo in Top-Left */
+  .banana-logo {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+  }
+  
+  .banana-logo img {
+    width: 150px; /* Adjust size of the banana logo */
+    height: auto;
+  }
+  
+  /* Yellow Circles in Top-Right */
+  .circle-container {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .circle {
+    width: 150px;
+    height: 150px;
+    background-color: #facc15; /* Yellow color */
+    border-radius: 50%;
+  }
+  
+  /* Welcome Text in Bottom-Left */
+  .welcome-text {
+    position: absolute;
+    bottom: 10px;
+    left: 100px;
+    font-size: 350px; /* Adjust font size */
+    font-weight: 200; /* Thin font */
+    color: black;
+    margin: 0;
+    font-family: "Jost", sans-serif;
+  }
+  
+  /* Next Button in Bottom-Right */
+  .next-button {
+    position: absolute;
+    bottom: 150px;
+    right: 50px;
+    width: 150px;
+    height: 150px;
+    border: 2px solid black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+  }
+  
+  .next-button:hover {
+    background-color: #facc15; /* Yellow on hover */
+    transform: scale(0.9);
+  }
+  
+  .arrow-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  

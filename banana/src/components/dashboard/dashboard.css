@@ -1,0 +1,121 @@
+/* Main Container */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 95vh;
+    background-color: #ffffff; /* White background */
+    font-family: "Jost", sans-serif; /* Optional font */
+    position: relative;
+  }
+  
+  /* Header Section */
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid #ccc; /* Optional separator */
+  }
+  
+  /* Logo Container */
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .app-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+  }
+  
+  /* Icons Container */
+  .icons-container {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .icon-button {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #000;
+  }
+  
+  .icon-button:hover {
+    color: #555; /* Optional hover effect */
+  }
+  
+  /* Main Content */
+  .dashboard-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-grow: 1;
+  }
+  
+  /* Welcome Text */
+  .welcome-text-2 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  /* Prompt Text */
+  .prompt-text {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  
+  /* Start Button */
+  .start-button {
+    background-color: #facc15;
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .start-button:hover {
+    background-color: #e5b809;
+    transform: scale(1.05);
+  }
+  
+  /* Explore Profile Link */
+  .explore-profile {
+    font-size: 14px;
+    color: #888;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+  
+  .explore-profile:hover {
+    text-decoration: underline;
+  }
+  
+  /* Bottom Chat Icon */
+  .dashboard-container::after {
+    content: "💬";
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
