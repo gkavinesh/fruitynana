@@ -5,6 +5,8 @@ import Login from './components/login/login';
 import Register from './components/login/register';
 import Dashboard from './components/dashboard/dashboard'
 import Game from './components/game/game'
+import Type from './components/type/type'
+import Difficulty from './components/difficulty/difficulty'
 
 const App = () => {
   return (
@@ -14,6 +16,8 @@ const App = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/game" element={<Game />} />
+      <Route path="/type" element={<Type />} />
+      <Route path="/difficulty" element={<Difficulty />} />
     </Routes>
   );
 };
