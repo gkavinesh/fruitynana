@@ -1,81 +1,92 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import bananaLogo from "../../assets/banana.png"; // Adjust the path to your logo
+import { FaBell, FaUserAlt, FaCog, FaSignOutAlt, FaQuestionCircle } from "react-icons/fa";
 import "./dashboard.css";
+import axios from "axios"; // For making API requests
+import Preloader from "../preloader/preloader"; // Import the Preloader component
 
 const Dashboard = () => {
-  const [userName, setUserName] = useState(""); // Store the logged-in user's name
-  const navigate = useNavigate();
+  const [userName, setUserName] = useState(""); // State to store the user's name
+  const [loading, setLoading] = useState(true); // To show the loading state
+  const navigate = useNavigate(); // Initialize navigate for routing
 
+  // Fetch session data on component mount
   useEffect(() => {
-    const fetchSession = async () => {
+    const fetchSessionData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/users/session", {
-          credentials: "include", // Include cookies for session management
+        const response = await axios.get("http://localhost:5000/api/users/session", {
+          withCredentials: true, // Ensure the session cookie is included
         });
-        if (response.ok) {
-          const data = await response.json();
-          setUserName(data.name); // Set the name from the session data
-        } else {
-          navigate("/login"); // Redirect to login if session is invalid
-        }
-      } catch (error) {
-        console.error("Error fetching session:", error);
-        navigate("/login"); // Redirect to login on error
+        
+        // Successfully got session data
+        setUserName(response.data.name); // Set the user's name
+        console.log("Session ID: ", response.data.sessionId); // Log the session ID (if returned by the backend)
+
+        // Add a 3-second delay to show the preloader
+        setTimeout(() => {
+          setLoading(false); // Set loading to false after 3 seconds
+        }, 3000);
+
+      } catch (err) {
+        console.error("Error fetching session data:", err);
+        setLoading(false); // Set loading to false even if there's an error
+        navigate("/login"); // Redirect to login page if no session is found
       }
     };
 
-    fetchSession();
+    fetchSessionData(); // Fetch session data when the component mounts
   }, [navigate]);
 
-  const handleLogout = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/api/users/logout", {
-        method: "POST",
-        credentials: "include", // Include cookies for session
-      });
-      if (response.ok) {
-        navigate("/login"); // Redirect to login after logout
-      } else {
-        console.error("Logout failed");
-      }
-    } catch (error) {
-      console.error("Error during logout:", error);
-    }
-  };
+  // If still loading, show the preloader
+  if (loading) {
+    return <Preloader />;
+  }
 
   return (
     <div className="dashboard-container">
-      {/* Header */}
       <div className="dashboard-header">
         <div className="logo-container">
           <img src={bananaLogo} alt="Fruitynana Logo" className="logo" />
           <h1 className="app-title">fruitynana</h1>
         </div>
         <div className="icons-container">
-          <button aria-label="Notifications" className="icon-button">🔔</button>
-          <button aria-label="Profile" className="icon-button">👤</button>
-          <button aria-label="Settings" className="icon-button">⚙️</button>
-          <button aria-label="Logout" className="icon-button" onClick={handleLogout}>🚪</button>
+          <button className="icon-button">
+            <FaUserAlt size={24} />
+          </button>
+          <button className="icon-button">
+            <FaCog size={24} />
+          </button>
+          <button className="icon-button">
+            <FaSignOutAlt size={24} />
+          </button>
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="dashboard-content">
-        <p className="welcome-text-2">Hi {userName || "User"}</p>
+        <p className="hello">Hi, <b>{userName || "User"}</b></p> {/* Display the user’s name */}
         <h2 className="prompt-text">Shall we begin?</h2>
-        <button className="start-button" onClick={() => navigate("/create-game")}>
-          Create my game →
-        </button>
-        <p className="explore-profile" onClick={() => navigate("/profile")}>
-          Explore my profile
-        </p>
+        <Link to="/type"><button className="start-button">Create my game →</button></Link>
+        <h2 className="prompt-text-2"><Link to="/about">learn more about the game here</Link></h2>
+      </div>
+
+      {/* Question Icon at Bottom Right */}
+      <div className="question-icon-container">
+        <FaQuestionCircle size={32} />
       </div>
     </div>
   );
 };
 
 export default Dashboard;
+
+
+
+
+
+
+
+
 
 
 

@@ -5,6 +5,7 @@ const {
   loginUser,
   logoutUser,
   getCurrentSession,
+  googleLogin,  // New Google Login Route
 } = require("../controllers/userController");
 
 // Register Route
@@ -12,6 +13,9 @@ router.post("/register", registerUser);
 
 // Login Route
 router.post("/login", loginUser);
+
+// Google OAuth Login Route
+router.post("/google-login", googleLogin);  // Handle Google login here
 
 // Logout Route
 router.post("/logout", logoutUser);
