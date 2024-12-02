@@ -1,0 +1,181 @@
+/* General styles */
+.difficulty-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Header */
+.difficulty-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f8f800;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.app-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.icons-container {
+    display: flex;
+    gap: 20px;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.icon-button:hover {
+    background-color: #f0f0f0;
+}
+
+.icon-button svg {
+    fill: #333;
+}
+
+/* Main Content */
+.difficulty-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px; /* Adjusted margin for better spacing */
+    width: 100%;
+}
+
+.welcome-text-2 {
+    font-size: 36px;
+    font-weight: 300;
+    color: #333;
+    margin-bottom: 300px;
+}
+
+.prompt-text {
+    font-size: 22px;
+    color: #555;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.prompt-text-21 {
+    font-size: 16px;
+    color: #000000;
+    margin-top: 30px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.start-button {
+    background-color: #ffcc00;
+    border: none;
+    padding: 20px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 200px; /* Makes the button wider for a more consistent design */
+    margin: 10px;
+}
+
+.start-button:hover {
+    background-color: #e6b800;
+}
+
+/* Multiplayer Room Code Section */
+.room-code-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.room-code-text {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.room-code-input {
+    width: 250px;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.room-code-input:focus {
+    outline: none;
+    border-color: #ffcc00;
+}
+
+.start-button {
+    background-color: #ffcc00;
+    width: 250px; /* Make the Join Game button same width as input */
+    padding: 15px;
+}
+
+.start-button:hover {
+    background-color: #ffcc00;
+}
+
+/* Back Link Styling */
+.prompt-text-21 {
+    font-size: 16px;
+    color: #000;
+    margin-top: 20px;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Question Icon at Bottom Right */
+.question-icon-container {
+    position: fixed;
+    bottom: 50px;
+    right: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Gives a soft shadow for better visibility */
+    transition: background-color 0.3s ease;
+}
+
+.question-icon-container:hover {
+    background-color: #f0f0f0; /* Optional: Adds a hover effect */
+}
+
+/* Button Container */
+.button-container-3 {
+    display: flex;
+    gap: 20px;
+}

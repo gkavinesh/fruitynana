@@ -1,121 +1,126 @@
-/* Main Container */
+/* dashboard.css */
+
+/* General styles */
 .dashboard-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 95vh;
-    background-color: #ffffff; /* White background */
-    font-family: "Jost", sans-serif; /* Optional font */
-    position: relative;
-  }
-  
-  /* Header Section */
-  .dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    border-bottom: 1px solid #ccc; /* Optional separator */
-  }
-  
-  /* Logo Container */
-  .logo-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .logo {
-    width: 40px;
-    height: auto;
-    margin-right: 10px;
-  }
-  
-  .app-title {
-    font-size: 20px;
-    font-weight: bold;
-    color: #000;
-  }
-  
-  /* Icons Container */
-  .icons-container {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .icon-button {
-    font-size: 24px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #000;
-  }
-  
-  .icon-button:hover {
-    color: #555; /* Optional hover effect */
-  }
-  
-  /* Main Content */
-  .dashboard-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    flex-grow: 1;
-  }
-  
-  /* Welcome Text */
-  .welcome-text-2 {
-    font-size: 16px;
-    font-weight: 400;
-    color: #555;
-    margin-bottom: 20px;
-  }
-  
-  /* Prompt Text */
-  .prompt-text {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 30px;
-  }
-  
-  /* Start Button */
-  .start-button {
-    background-color: #facc15;
-    color: #000;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  .start-button:hover {
-    background-color: #e5b809;
-    transform: scale(1.05);
-  }
-  
-  /* Explore Profile Link */
-  .explore-profile {
-    font-size: 14px;
-    color: #888;
-    margin-top: 20px;
-    cursor: pointer;
-  }
-  
-  .explore-profile:hover {
-    text-decoration: underline;
-  }
-  
-  /* Bottom Chat Icon */
-  .dashboard-container::after {
-    content: "💬";
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    font-size: 24px;
-    cursor: pointer;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Header */
+.dashboard-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f8f800;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 50px;
+  height: auto;
+  margin-right: 15px;
+  margin-top: 15px;
+}
+
+.app-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.icons-container {
+  display: flex;
+  gap: 20px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.icon-button:hover {
+  background-color: #f0f0f0;
+}
+
+.icon-button svg {
+  fill: #333;
+}
+
+/* Main Content */
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -60px;
+}
+
+.hello {
+  font-size: 25px;
+  font-weight: 300;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 300px;
+}
+
+.prompt-text {
+  font-size: 22px;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.prompt-text-2 {
+  font-size: 16px;
+  color: #000000;
+  margin-top: 30px;
+  text-decoration: none;
+}
+
+.start-button {
+  background-color: #ffcc00;
+  border: none;
+  padding: 20px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.start-button:hover {
+  background-color: #e6b800;
+}
+
+/* Add this to dashboard.css */
+.question-icon-container {
+  position: fixed;
+  bottom: 50px;
+  right: 40px;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Gives a soft shadow for better visibility */
+  transition: background-color 0.3s ease;
+}
+
+.question-icon-container:hover {
+  background-color: #f0f0f0; /* Optional: Adds a hover effect */
+}
+
+
   

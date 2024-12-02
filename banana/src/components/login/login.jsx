@@ -1,51 +1,64 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify"; // Import Toastify
 import "react-toastify/dist/ReactToastify.css"; // Import Toastify CSS
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import bananaLogo from "../../assets/banana.png";
 import googleLogo from "../../assets/google.png";
-import Preloader from "../preloader/preloader";
+import Preloader from "../preloader/preloader"; // Import Preloader
 import "./login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // Loading state to show preloader
   const navigate = useNavigate(); // Initialize navigation hook
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 3000); // Show preloader for 3 seconds
 
     return () => clearTimeout(timer);
   }, []);
 
+  // Handle normal login (email/password)
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Normal login
       const { data } = await axios.post("http://localhost:5000/api/users/login", {
         email,
         password,
       });
-      toast.success("Login successful! Redirecting...", {
+
+      // Save token and userName from response
+      setToken(data.token); // Save JWT token for authentication
+      setUserName(data.user.name); // Set user's name for session
+
+      toast.success("Login successful!", {
         position: "top-right",
         autoClose: 3000,
       });
+
       setTimeout(() => {
-        navigate("/dashboard"); // Redirect to the dashboard or desired page
+        navigate("/dashboard"); // Redirect to the dashboard after login
       }, 3000); // Redirect after 3 seconds
     } catch (error) {
-      toast.error(error.response?.data?.message || "Login failed! Please try again.", {
+      toast.error(error.response?.data?.message || "Login failed!", {
         position: "top-right",
         autoClose: 3000,
       });
     }
   };
 
+  // Handle Google OAuth login (redirect to backend for authentication)
+  const handleGoogleLogin = () => {
+    window.location.href = "http://localhost:5000/auth/google"; // Redirect to backend Google login route
+  };
+
   if (loading) {
-    return <Preloader />;
+    return <Preloader />; // Show preloader while loading
   }
 
   return (
@@ -58,6 +71,7 @@ const Login = () => {
             <h1 className="app-title">fruitynana</h1>
           </div>
 
+          {/* Email and Password Fields */}
           <div className="name-fields">
             <input
               type="email"
@@ -88,10 +102,13 @@ const Login = () => {
           <span>or</span>
         </div>
 
-        <button className="google-button">
-          <img src={googleLogo} alt="Google Logo" className="google-logo" />
-          Sign In with Google
-        </button>
+        {/* Google OAuth Button */}
+        <div className="name-fields">
+          <button className="google-button" onClick={handleGoogleLogin}>
+            <img src={googleLogo} alt="Google Logo" className="google-logo" />
+            Sign In with Google
+          </button>
+        </div>
 
         <p className="signup-link">
           Sign Up? <a href="/register">Click here</a>
@@ -102,5 +119,7 @@ const Login = () => {
 };
 
 export default Login;
+
+
 
 

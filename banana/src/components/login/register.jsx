@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css"; // Import Toastify CSS
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import bananaLogo from "../../assets/banana.png";
 import googleLogo from "../../assets/google.png";
-import Preloader from "../preloader/preloader";
+import Preloader from "../preloader/preloader"; // Import Preloader
 import "./register.css";
 
 const Register = () => {
@@ -37,7 +37,7 @@ const Register = () => {
         autoClose: 3000,
       });
       setTimeout(() => {
-        navigate("/welcome"); // Redirect to the new page (e.g., "/welcome")
+        navigate("/login"); // Redirect to the new page (e.g., "/welcome")
       }, 3000); // Redirect after 3 seconds
     } catch (error) {
       toast.error(error.response?.data?.message || "Registration failed!", {
@@ -45,6 +45,11 @@ const Register = () => {
         autoClose: 3000,
       });
     }
+  };
+
+  const handleGoogleRegister = () => {
+    // Redirect to backend for Google OAuth registration
+    window.location.href = "http://localhost:5000/auth/google";
   };
 
   if (loading) {
@@ -111,8 +116,9 @@ const Register = () => {
           <span>or</span>
         </div>
 
+        {/* Google OAuth Button */}
         <div className="name-fields">
-          <button className="google-button">
+          <button className="google-button" onClick={handleGoogleRegister}>
             <img src={googleLogo} alt="Google Logo" className="google-logo" />
             Sign Up with Google
           </button>
@@ -127,6 +133,7 @@ const Register = () => {
 };
 
 export default Register;
+
 
 
 

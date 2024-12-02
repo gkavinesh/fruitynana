@@ -1,0 +1,127 @@
+/* dashboard.css */
+
+/* General styles */
+.type-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Header */
+  .type-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f8f800;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 50px;
+    height: auto;
+    margin-right: 15px;
+    margin-top: 15px;
+  }
+  
+  .app-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .icons-container {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+  }
+  
+  .icon-button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .icon-button svg {
+    fill: #333;
+  }
+  
+  /* Main Content */
+  .type-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 250px;
+  }
+  
+  .welcome-text-2 {
+    font-size: 36px;
+    font-weight: 300;
+    color: #333;
+    margin-bottom: 300px;
+  }
+  
+  .prompt-text {
+    font-size: 22px;
+    color: #555;
+    margin-bottom: 30px;
+  }
+  
+  .prompt-text-21 {
+    font-size: 16px;
+    color: #000000;
+    margin-top: 30px;
+    text-decoration: none;
+  }
+  
+  .start-button-1 {
+    background-color: #ffcc00;
+    border: none;
+    padding: 20px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .start-button-1:hover {
+    background-color: #e6b800;
+  }
+  
+  /* Add this to dashboard.css */
+  .question-icon-container {
+    position: fixed;
+    bottom: 50px;
+    right: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Gives a soft shadow for better visibility */
+    transition: background-color 0.3s ease;
+  }
+  
+  .question-icon-container:hover {
+    background-color: #f0f0f0; /* Optional: Adds a hover effect */
+  }
+
+  .button-container-1{
+    display: flex;
+    gap: 20px;
+  }
