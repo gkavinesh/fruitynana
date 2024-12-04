@@ -108,36 +108,61 @@
     background-color: #e6b800;
 }
 
-/* Multiplayer Room Code Section */
+/* CSS for Room Code Input and Button */
 .room-code-container {
-    margin-top: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
-}
-
-.room-code-text {
+    padding: 20px;
+  }
+  
+  .room-code-text {
     font-size: 18px;
     margin-bottom: 10px;
-    color: #555;
-}
-
-.room-code-input {
-    width: 250px;
-    padding: 12px;
+    font-weight: 600;
+  }
+  
+  .input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .room-code-input {
+    padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-.room-code-input:focus {
-    outline: none;
-    border-color: #ffcc00;
-}
+    width: 200px; /* Adjust width as needed */
+    margin-right: 10px; /* Space between input and button */
+  }
+  
+  .arrow-button {
+    background-color: #ffcc00; /* Button background */
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .arrow-button:hover {
+    background-color: #e6b800; /* Change background on hover */
+    transform: scale(1.1); /* Slightly enlarge the button on hover */
+  }
+  
+  .arrow-button svg {
+    color: white; /* Arrow icon color */
+  }
+  
+  .arrow-button:focus {
+    outline: none; /* Remove focus outline */
+  }
+  
 
 .start-button {
     background-color: #ffcc00;

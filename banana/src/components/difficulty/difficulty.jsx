@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import bananaLogo from "../../assets/banana.png"; // Adjust the path to your logo
 import { FaUserAlt, FaCog, FaSignOutAlt, FaQuestionCircle } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 import "./difficulty.css";
 import axios from "axios"; // For making API requests
+import Preloader from "../preloader/preloader"; // Import Preloader component
 
 const Difficulty = () => {
   const [userName, setUserName] = useState(""); // State to store the user's name
@@ -12,7 +14,8 @@ const Difficulty = () => {
   const location = useLocation(); // Access the location object to get the state passed from navigate()
 
   const [mode, setMode] = useState(""); // Store the mode (single or multiplayer)
-  const [roomCode, setRoomCode] = useState(""); // Store the room code input (only for multiplayer)
+  const [difficulty, setDifficulty] = useState(""); // Store the difficulty (easy, medium, hard)
+  const [roomCode, setRoomCode] = useState(""); // State to store the room code
 
   // Fetch session data on component mount
   useEffect(() => {
@@ -34,7 +37,9 @@ const Difficulty = () => {
       }
     };
 
-    fetchSessionData(); // Fetch session data when the component mounts
+    setTimeout(() => {
+      fetchSessionData(); // Fetch session data after 3 seconds delay
+    }, 3000); // Simulate the loading time by delaying the fetch
 
     // Get the mode passed via state
     if (location.state && location.state.mode) {
@@ -44,12 +49,26 @@ const Difficulty = () => {
 
   // If still loading, show a loading state
   if (loading) {
-    return <div>Loading...</div>;
+    return <Preloader />; // Show preloader for 3 seconds
   }
 
-  // Handle room code change
+  // Handle difficulty button click (auto navigate when clicked)
+  const handleDifficultyChange = (difficulty) => {
+    setDifficulty(difficulty);
+    navigate("/begin", { state: { mode, difficulty } }); // Passing mode and difficulty to the next page
+  };
+
+  // Handle room code change (wait until arrow button is clicked)
   const handleRoomCodeChange = (e) => {
     setRoomCode(e.target.value);
+  };
+
+  // Handle the arrow button click for joining the game
+  const handleJoinGame = () => {
+    // Only navigate when the arrow button is clicked and a room code exists
+    if (roomCode) {
+      navigate("/begin", { state: { mode, difficulty, roomCode } });
+    }
   };
 
   return (
@@ -73,32 +92,44 @@ const Difficulty = () => {
       </div>
 
       <div className="difficulty-content">
-        <h2 className="prompt-text">Selected Mode: {mode === "single" ? "Single Player" : "Multiplayer"}</h2>
+        <h2 className="prompt-text">
+          Selected Mode: <b>{mode === "single" ? "Single Player" : "Multiplayer"}</b>
+        </h2>
 
         {/* Difficulty selection buttons */}
         <h2 className="prompt-text">Select Difficulty</h2>
         <div className="button-container-3">
-          <button className="start-button">Easy</button>
-          <button className="start-button">Medium</button>
-          <button className="start-button">Hard</button>
+          <button className="start-button" onClick={() => handleDifficultyChange('Easy')}>
+            Easy
+          </button>
+          <button className="start-button" onClick={() => handleDifficultyChange('Medium')}>
+            Medium
+          </button>
+          <button className="start-button" onClick={() => handleDifficultyChange('Hard')}>
+            Hard
+          </button>
         </div>
-        <br></br>
-        
+        <br />
 
         {/* Multiplayer room code section */}
         {mode === "multiplayer" && (
-            
           <div className="room-code-container">
             or
+            <br />
             <h3 className="room-code-text">Enter Room Code</h3>
-            <input
-              type="text"
-              placeholder="Room Code"
-              value={roomCode}
-              onChange={handleRoomCodeChange}
-              className="room-code-input"
-            />
-            <button className="start-button">Join Game</button>
+            <br />
+            <div className="input-container">
+              <input
+                type="text"
+                placeholder="Room Code"
+                value={roomCode}
+                onChange={handleRoomCodeChange}
+                className="room-code-input"
+              />
+              <button className="arrow-button" onClick={handleJoinGame}>
+                <FaArrowRight size={20} /> {/* Arrow icon */}
+              </button>
+            </div>
           </div>
         )}
 
@@ -116,5 +147,8 @@ const Difficulty = () => {
 };
 
 export default Difficulty;
+
+
+
 
 
