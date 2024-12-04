@@ -1,0 +1,115 @@
+/* General styles */
+.explore-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+}
+  
+/* Header */
+.explore-header-1 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f8f800;
+    padding: 10px;
+    border-radius: 8px;
+}
+  
+.logo-container-explore {
+    display: flex;
+    align-items: center;
+}
+  
+.logo-explore {
+    width: 50px;
+    height: auto;
+    margin-right: 15px;
+    margin-top: 1px;
+}
+  
+.app-title-explore {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+  
+.icons-container-explore {
+    display: flex;
+    gap: 20px;
+}
+  
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+  
+.icon-button:hover {
+    background-color: #f0f0f0;
+}
+  
+.icon-button svg {
+    fill: #333;
+}
+  
+/* Main Content */
+.explore-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -60px;
+}
+  
+.prompt-text-2-explore {
+    font-size: 14px;
+    color: #000000;
+    margin-top: 30px;
+    text-decoration: none; /* Ensures no underline */
+}
+
+.prompt-text-2-explore:hover {
+    text-decoration: none; /* Ensures no underline even on hover */
+}
+
+/* Instructions Section */
+.instructions-section {
+    margin-top: 160px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    border: 1px solid black;
+    text-align: left;
+}
+
+.instructions-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.instructions-text {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.instructions-list {
+    list-style: decimal inside;
+    margin: 10px 0;
+    padding-left: 0;
+}
+
+.instructions-list li {
+    margin-bottom: 5px;
+    line-height: 1.6;
+}
