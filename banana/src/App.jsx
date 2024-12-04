@@ -7,6 +7,8 @@ import Dashboard from './components/dashboard/dashboard'
 import Game from './components/game/game'
 import Type from './components/type/type'
 import Difficulty from './components/difficulty/difficulty'
+import Begin from './components/begin/begin'
+import Explore from './components/explore/explore'
 
 const App = () => {
   return (
@@ -18,6 +20,8 @@ const App = () => {
       <Route path="/game" element={<Game />} />
       <Route path="/type" element={<Type />} />
       <Route path="/difficulty" element={<Difficulty />} />
+      <Route path="/begin" element={<Begin />} />
+      <Route path="/explore" element={<Explore />} />
     </Routes>
   );
 };
