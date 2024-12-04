@@ -4,6 +4,7 @@ import bananaLogo from "../../assets/banana.png"; // Adjust the path to your log
 import { FaUserAlt, FaCog, FaSignOutAlt, FaQuestionCircle } from "react-icons/fa";
 import "./type.css";
 import axios from "axios"; // For making API requests
+import Preloader from "../preloader/preloader"; // Import Preloader component
 
 const Type = () => {
   const [userName, setUserName] = useState(""); // State to store the user's name
@@ -30,12 +31,14 @@ const Type = () => {
       }
     };
 
-    fetchSessionData(); // Fetch session data when the component mounts
+    setTimeout(() => {
+      fetchSessionData(); // Fetch session data after a 3-second delay
+    }, 3000); // Simulate the loading time by delaying the fetch
   }, [navigate]);
 
-  // If still loading, show a loading state
+  // If still loading, show the Preloader
   if (loading) {
-    return <div>Loading...</div>;
+    return <Preloader />;
   }
 
   // Function to handle button clicks and redirect to the difficulty page
@@ -66,10 +69,10 @@ const Type = () => {
       <div className="type-content">
         <h2 className="prompt-text">Select Player Mode</h2>
         <div className="button-container-1">
-          <button className="start-button-1" onClick={() => handleModeSelection('single')}>
+          <button className="start-button" onClick={() => handleModeSelection('single')}>
             Single Player
           </button>
-          <button className="start-button-1" onClick={() => handleModeSelection('multiplayer')}>
+          <button className="start-button" onClick={() => handleModeSelection('multiplayer')}>
             Multiplayer
           </button>
         </div>
