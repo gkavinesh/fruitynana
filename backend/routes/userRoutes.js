@@ -5,7 +5,8 @@ const {
   loginUser,
   logoutUser,
   getCurrentSession,
-  googleLogin,  // New Google Login Route
+  googleLogin,
+  saveScore, // Add saveScore to the routes
 } = require("../controllers/userController");
 
 // Register Route
@@ -15,7 +16,7 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 
 // Google OAuth Login Route
-router.post("/google-login", googleLogin);  // Handle Google login here
+router.post("/google-login", googleLogin);
 
 // Logout Route
 router.post("/logout", logoutUser);
@@ -23,6 +24,10 @@ router.post("/logout", logoutUser);
 // Get Current Session Route
 router.get("/session", getCurrentSession);
 
+// Save Score Route
+router.post("/score", saveScore); // Move the saveScore route here
+
 module.exports = router;
+
 
 
