@@ -42,6 +42,7 @@ const Landing = () => {
 
       {/* Welcome Text in Bottom-Left */}
       <h1 className="welcome-text">Welcome</h1>
+      <h1 className="welcome-text-2">to fruitynana</h1>
 
       {/* Next Button in Bottom-Right */}
       <button className="next-button" onClick={handleNavigate}>
