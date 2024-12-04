@@ -1,4 +1,4 @@
-const User = require("../models/User");
+const User = require("../models/user.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");  // If you're using JWT for authentication
 
@@ -125,6 +125,46 @@ exports.getCurrentSession = (req, res) => {
     res.status(401).json({ message: "No active session" });
   }
 };
+
+exports.saveScore = async (req, res) => {
+  const { email, score } = req.body; // Extract email and score from the request body
+
+  if (!email || score === undefined) {
+    return res.status(400).json({ success: false, message: "Email and score are required" });
+  }
+
+  try {
+    // Find the user by email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    // Add the score to the scores array
+    user.scores.push(score);
+
+    // Update the highestScore if the new score is greater
+    if (!user.highestScore || score > user.highestScore) {
+      user.highestScore = score;
+    }
+
+    // Save the updated user document
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Score saved successfully!",
+      scores: user.scores,
+      highestScore: user.highestScore,
+    });
+  } catch (err) {
+    console.error("Error saving score:", err);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+
+
 
 
 

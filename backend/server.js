@@ -9,7 +9,9 @@ const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const userRoutes = require("./routes/userRoutes");
 const gameRoutes = require("./routes/gameRoutes");
-const User = require("./models/User"); // Assuming you have a User model
+const User = require("./models/user.js"); // Assuming you have a User model
+const userController = require("./controllers/userController");
+
 
 const app = express();
 
@@ -117,6 +119,7 @@ app.get("/api/users/session", (req, res) => {
 // User Routes
 app.use("/api/users", userRoutes);
 app.use("/api/game", gameRoutes);
+
 
 // Start Server
 const PORT = process.env.PORT || 5000;
