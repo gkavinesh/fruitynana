@@ -45,7 +45,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <div className="dashboard-header">
+      <div className="dashboard-header-1">
         <div className="logo-container">
           <img src={bananaLogo} alt="Fruitynana Logo" className="logo" />
           <h1 className="app-title">fruitynana</h1>
@@ -66,8 +66,11 @@ const Dashboard = () => {
       <div className="dashboard-content">
         <p className="hello">Hi, <b>{userName || "User"}</b></p> {/* Display the user’s name */}
         <h2 className="prompt-text">Shall we begin?</h2>
-        <Link to="/type"><button className="start-button">Create my game →</button></Link>
-        <h2 className="prompt-text-2"><Link to="/about">learn more about the game here</Link></h2>
+        <Link to="/type"><button className="button-57" role="button">
+      <span className="text-2">Ready to play?</span>
+      <span>Create my game</span>
+    </button></Link>
+        <h2 className="prompt-text-2"><Link to="/explore">Explore the game</Link></h2>
       </div>
 
       {/* Question Icon at Bottom Right */}
