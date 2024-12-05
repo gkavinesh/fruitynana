@@ -10,6 +10,7 @@ import Difficulty from './components/difficulty/difficulty'
 import Begin from './components/begin/begin'
 import Explore from './components/explore/explore'
 import Score from './components/score/score'
+import Profile from './components/profile/profile'
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
       <Route path="/begin" element={<Begin />} />
       <Route path="/explore" element={<Explore />} />
       <Route path="/score" element={<Score />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 };
