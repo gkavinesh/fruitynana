@@ -120,32 +120,37 @@ exports.logoutUser = async (req, res) => {
 // Get Current Session
 exports.getCurrentSession = (req, res) => {
   if (req.session.userId) {
-    res.status(200).json({ name: req.session.userName });
+    // Assuming the user's name and email are stored in the session
+    res.status(200).json({
+      name: req.session.userName,
+      email: req.session.userEmail,  // Return the email along with the name
+    });
   } else {
     res.status(401).json({ message: "No active session" });
   }
 };
 
-exports.saveScore = async (req, res) => {
-  const { email, score } = req.body; // Extract email and score from the request body
 
-  if (!email || score === undefined) {
-    return res.status(400).json({ success: false, message: "Email and score are required" });
+exports.saveScore = async (req, res) => {
+  const { name, score } = req.body; // Extract name and score from the request body
+
+  if (!name || score === undefined) {
+    return res.status(400).json({ success: false, message: "Name and score are required" });
   }
 
   try {
-    // Find the user by email
-    const user = await User.findOne({ email });
+    // Find the user by name (or email if that's your choice)
+    const user = await User.findOne({ name }); // Or you could use email here instead of name
 
     if (!user) {
       return res.status(404).json({ success: false, message: "User not found" });
     }
 
-    // Add the score to the scores array
-    user.scores.push(score);
+    // Update the score with the latest score
+    user.score = score;
 
     // Update the highestScore if the new score is greater
-    if (!user.highestScore || score > user.highestScore) {
+    if (score > user.highestScore) {
       user.highestScore = score;
     }
 
@@ -155,14 +160,31 @@ exports.saveScore = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "Score saved successfully!",
-      scores: user.scores,
-      highestScore: user.highestScore,
+      score: user.score, // Return the updated score
+      highestScore: user.highestScore, // Return the updated highestScore
     });
   } catch (err) {
     console.error("Error saving score:", err);
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
+
+
+
+// Fetch all user scores
+exports.getAllScores = async (req, res) => {
+  try {
+    // Fetch all users sorted by their score (highest first)
+    const allScores = await User.find().sort({ score: -1 }); // No limit, so it fetches all users
+
+    // Return all user scores as a response
+    res.status(200).json(allScores);
+  } catch (error) {
+    console.error("Error fetching all user scores:", error);
+    res.status(500).json({ message: "Error fetching user scores", error });
+  }
+};
+
 
 
 
