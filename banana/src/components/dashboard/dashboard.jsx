@@ -11,6 +11,19 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true); // To show the loading state
   const navigate = useNavigate(); // Initialize navigate for routing
 
+   // Logout User function
+   const logoutUser = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/users/logout", {}, { withCredentials: true });
+      if (response.status === 200) {
+        // Redirect to login page after successful logout
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
+
   // Fetch session data on component mount
   useEffect(() => {
     const fetchSessionData = async () => {
@@ -18,9 +31,12 @@ const Dashboard = () => {
         const response = await axios.get("http://localhost:5000/api/users/session", {
           withCredentials: true, // Ensure the session cookie is included
         });
-        
+
         // Successfully got session data
-        setUserName(response.data.name); // Set the user's name
+        const fullName = response.data.name;
+        const firstName = fullName.split(" ")[0]; // Get the first name by splitting the full name
+        setUserName(firstName); // Set the user's first name
+
         console.log("Session ID: ", response.data.sessionId); // Log the session ID (if returned by the backend)
 
         // Add a 3-second delay to show the preloader
@@ -51,25 +67,22 @@ const Dashboard = () => {
           <h1 className="app-title">fruitynana</h1>
         </div>
         <div className="icons-container">
-          <button className="icon-button">
+          <Link to="/profile"><button className="icon-button">
             <FaUserAlt size={24} />
-          </button>
-          <button className="icon-button">
-            <FaCog size={24} />
-          </button>
-          <button className="icon-button">
+          </button></Link>
+          <button className="icon-button" onClick={logoutUser}>
             <FaSignOutAlt size={24} />
           </button>
         </div>
       </div>
 
       <div className="dashboard-content">
-        <p className="hello">Hi, <b>{userName || "User"}</b></p> {/* Display the user’s name */}
+        <p className="hello">Hi, <b>{userName || "User"}</b></p> {/* Display the user's first name */}
         <h2 className="prompt-text">Shall we begin?</h2>
         <Link to="/type"><button className="button-57" role="button">
-      <span className="text-2">Ready to play?</span>
-      <span>Create my game</span>
-    </button></Link>
+          <span className="text-2">Ready to play?</span>
+          <span className="build">Build Now !</span>
+        </button></Link>
         <h2 className="prompt-text-2"><Link to="/explore">Explore the game</Link></h2>
       </div>
 
@@ -82,6 +95,7 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
 
 
 

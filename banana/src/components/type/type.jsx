@@ -11,6 +11,19 @@ const Type = () => {
   const [loading, setLoading] = useState(true); // To show the loading state
   const navigate = useNavigate(); // Initialize navigate for routing
 
+  // Logout User function
+  const logoutUser = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/users/logout", {}, { withCredentials: true });
+      if (response.status === 200) {
+        // Redirect to login page after successful logout
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
+
   // Fetch session data on component mount
   useEffect(() => {
     const fetchSessionData = async () => {
@@ -57,10 +70,7 @@ const Type = () => {
           <button className="icon-button">
             <FaUserAlt size={24} />
           </button>
-          <button className="icon-button">
-            <FaCog size={24} />
-          </button>
-          <button className="icon-button">
+          <button className="icon-button" onClick={logoutUser}>
             <FaSignOutAlt size={24} />
           </button>
         </div>

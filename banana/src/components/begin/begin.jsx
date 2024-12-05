@@ -16,9 +16,17 @@ const Begin = () => {
   const [difficulty, setDifficulty] = useState(""); // Store the difficulty (easy, medium, hard)
   const [roomCode, setRoomCode] = useState(""); // State to store the room code
 
-  const handleJoinGame = () => {
-    // Logic for joining the game
-    console.log("Joining game with code:", roomCode);
+  // Logout User function
+  const logoutUser = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/users/logout", {}, { withCredentials: true });
+      if (response.status === 200) {
+        // Redirect to login page after successful logout
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
   };
 
   // Fetch session data on component mount
@@ -74,10 +82,7 @@ const Begin = () => {
           <button className="icon-button">
             <FaUserAlt size={24} />
           </button>
-          <button className="icon-button">
-            <FaCog size={24} />
-          </button>
-          <button className="icon-button">
+          <button className="icon-button" onClick={logoutUser}>
             <FaSignOutAlt size={24} />
           </button>
         </div>

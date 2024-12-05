@@ -1,27 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import bananaLogo from "../../assets/banana.png";
-import { FaClock, FaThumbsUp, FaTimesCircle } from "react-icons/fa";
+import { FaClock } from "react-icons/fa"; // Remove unused icons import
 import axios from "axios";
 import Preloader from "../loader/preloader"; // Import the Preloader component
-import "./game.css";
+import "./game.css"; // Import your styles
 
 const Game = () => {
   const [questionImage, setQuestionImage] = useState("");
   const [solution, setSolution] = useState(null);
   const [options, setOptions] = useState([]);
   const [score, setScore] = useState(0);
-  const [timer, setTimer] = useState(60);
+  const [timer, setTimer] = useState(60); // Default timer (Easy)
   const [selectedOption, setSelectedOption] = useState(null);
   const [message, setMessage] = useState("");
   const [showGame, setShowGame] = useState(false);
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState(""); // Add userEmail state
+  const [pointDeduction, setPointDeduction] = useState(""); // State for point deduction pop-up
+  const [showModal, setShowModal] = useState(false); // Show modal on game over
   const navigate = useNavigate();
 
   // Getting mode and difficulty from location state
   const location = useLocation();
   const { mode, difficulty } = location.state || {}; // Retrieve mode and difficulty
+
+  // Adjust timer based on difficulty
+  useEffect(() => {
+    if (difficulty === "Easy") {
+      setTimer(60); // 60 seconds for Easy
+    } else if (difficulty === "Medium") {
+      setTimer(45); // 45 seconds for Medium
+    } else if (difficulty === "Hard") {
+      setTimer(30); // 30 seconds for Hard
+    }
+  }, [difficulty]);
 
   // Show preloader before displaying the game
   useEffect(() => {
@@ -36,6 +49,7 @@ const Game = () => {
         withCredentials: true,
       });
       setUserName(response.data.name); // Set the username from session data
+      setUserEmail(response.data.email); // Capture the user's email
     } catch (error) {
       console.error("Error fetching session data:", error);
       navigate("/login"); // Redirect to login if session is invalid
@@ -57,12 +71,11 @@ const Game = () => {
     }
   };
 
-  // Save the user's final score to the backend
   const saveScore = async () => {
     try {
       const response = await axios.post(
         "http://localhost:5000/api/users/score", // Backend API for saving score
-        { email: userEmail, score }, // Pass userEmail and score
+        { name: userName, score }, // Pass userName and score instead of email
         { withCredentials: true }
       );
 
@@ -76,8 +89,6 @@ const Game = () => {
     }
   };
 
-
-  // Timer logic
   useEffect(() => {
     if (!showGame) return;
 
@@ -87,7 +98,12 @@ const Game = () => {
     } else {
       saveScore(); // Save score when the timer ends
       alert(`Game over! Your score: ${score}`);
-      navigate("/"); // Redirect to the homepage or results page
+      
+      // Show the modal after the game ends
+      setShowModal(true);
+
+      // Navigate to the score page after the modal is shown (optional)
+      navigate("/score", { state: { score, userName } }); // Pass score and username as state
     }
   }, [timer, showGame]);
 
@@ -116,10 +132,16 @@ const Game = () => {
 
     if (option === solution) {
       setScore((prev) => prev + scoreIncrement); // Add score for correct answer
-      setMessage("Correct!");
+      setMessage(" Correct!");
     } else {
       setScore((prev) => prev + scoreDecrement); // Deduct score for wrong answer
-      setMessage("Wrong! Try again.");
+      setMessage(" Wrong! Try again.");
+
+      // Set the point deduction message
+      setPointDeduction(scoreDecrement);
+
+      // Reset the point deduction after 1 second
+      setTimeout(() => setPointDeduction(""), 1000);
     }
 
     // Reset for the next question
@@ -142,9 +164,6 @@ const Game = () => {
         <div className="logo-container-game">
           <img src={bananaLogo} alt="Fruitynana Logo" className="logo" />
           <h1 className="app-title">fruitynana</h1>
-        </div>
-        <div className="user-info">
-          <p>Welcome, {userName}</p>
         </div>
         <div className="icons-container-game">
           <FaClock size={24} className="icon" />
@@ -183,11 +202,27 @@ const Game = () => {
         ))}
       </div>
 
+      {/* Point Deduction Pop-up */}
+      {pointDeduction && (
+        <div className="point-deduction-popup">
+          {pointDeduction}
+        </div>
+      )}
+
+      {/* Modal for Game Over */}
+      <div className={`modal ${showModal ? "show" : ""}`}>
+        <h2>Game Over!</h2>
+        <div className="score">
+          {score}
+        </div>
+        <button onClick={() => navigate("/dashboard")}>Go to Dashboard</button>
+        <button className="retry-button" onClick={() => window.location.reload()}>Retry</button>
+      </div>
+
       {/* Feedback Message */}
       {message && (
-        <div className={`feedback-message ${message === "Correct!" ? "correct" : "wrong"}`}>
-          {message === "Correct!" ? <FaThumbsUp /> : <FaTimesCircle />}
-          {message}
+        <div className={`feedback-message ${message === " Correct!" ? "correct" : "wrong"}`}>
+          {message} {/* Only display the message text */}
         </div>
       )}
     </div>
@@ -195,6 +230,11 @@ const Game = () => {
 };
 
 export default Game;
+
+
+
+
+
 
 
 

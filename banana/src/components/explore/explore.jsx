@@ -11,6 +11,19 @@ const Explore = () => {
     const [loading, setLoading] = useState(true); // To show the loading state
     const navigate = useNavigate(); // Initialize navigate for routing
 
+    // Logout User function
+   const logoutUser = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/users/logout", {}, { withCredentials: true });
+      if (response.status === 200) {
+        // Redirect to login page after successful logout
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
+
     // Fetch session data on component mount
     useEffect(() => {
         const fetchSessionData = async () => {
@@ -54,12 +67,9 @@ const Explore = () => {
                     <button className="icon-button">
                         <FaUserAlt size={24} />
                     </button>
-                    <button className="icon-button">
-                        <FaCog size={24} />
-                    </button>
-                    <button className="icon-button">
-                        <FaSignOutAlt size={24} />
-                    </button>
+                    <button className="icon-button" onClick={logoutUser}>
+            <FaSignOutAlt size={24} />
+          </button>
                 </div>
             </div>
 
@@ -76,13 +86,13 @@ const Explore = () => {
                     </p>
                     <ul className="instructions-list">
                         <li>
-                            <strong>Easy:</strong> You’ll have more time to solve the puzzle, but you’ll earn fewer points (1 point per correct answer).
+                            <strong>Easy:</strong> You’ll have more time to solve the puzzle, but you’ll earn fewer points (1 point per correct answer). If you answer incorrectly, no points are deducted.
                         </li>
                         <li>
-                            <strong>Medium:</strong> A balanced level of challenge with moderate time and points (2 points per correct answer).
+                            <strong>Medium:</strong> A balanced level of challenge with moderate time and points (2 points per correct answer). However, if your answer is wrong, you lose 1 point.
                         </li>
                         <li>
-                            <strong>Hard:</strong> Less time to solve each puzzle but higher rewards for success (3 points per correct answer). Speed and accuracy are key!
+                            <strong>Hard:</strong> Less time to solve each puzzle but higher rewards for success (3 points per correct answer). On incorrect answers, you lose 2 points, so accuracy is key!
                         </li>
                     </ul>
                     <p className="instructions-text">
@@ -95,6 +105,7 @@ const Explore = () => {
                         Good luck, and may the juiciest player win!
                     </p>
                 </div>
+
                 <h2 className="prompt-text-2-explore"><Link to="/dashboard">Go to Dashboard &rarr;</Link></h2>
             </div>
         </div>
