@@ -1,3 +1,5 @@
+// routes/userRoutes.js
+
 const express = require("express");
 const router = express.Router();
 const {
@@ -6,7 +8,8 @@ const {
   logoutUser,
   getCurrentSession,
   googleLogin,
-  saveScore, // Add saveScore to the routes
+  saveScore,
+  getAllScores, // Import the new method
 } = require("../controllers/userController");
 
 // Register Route
@@ -25,9 +28,13 @@ router.post("/logout", logoutUser);
 router.get("/session", getCurrentSession);
 
 // Save Score Route
-router.post("/score", saveScore); // Move the saveScore route here
+router.post("/score", saveScore);
+
+// Get All User Scores Route
+router.get("/all-scores", getAllScores);
 
 module.exports = router;
+
 
 
 
