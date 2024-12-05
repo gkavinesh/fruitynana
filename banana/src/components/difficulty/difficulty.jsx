@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import bananaLogo from "../../assets/banana.png"; // Adjust the path to your logo
+import bananaLogo from "../../assets/banana.png"; 
 import { FaUserAlt, FaCog, FaSignOutAlt, FaQuestionCircle } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import "./difficulty.css";
-import axios from "axios"; // For making API requests
-import Preloader from "../preloader/preloader"; // Import Preloader component
+import axios from "axios"; 
+import Preloader from "../preloader/preloader"; 
 
 const Difficulty = () => {
-  const [userName, setUserName] = useState(""); // State to store the user's name
-  const [loading, setLoading] = useState(true); // To show the loading state
-  const navigate = useNavigate(); // Initialize navigate for routing
-  const location = useLocation(); // Access the location object to get the state passed from navigate()
+  const [userName, setUserName] = useState(""); 
+  const [loading, setLoading] = useState(true); 
+  const navigate = useNavigate(); 
+  const location = useLocation(); 
 
-  const [mode, setMode] = useState(""); // Store the mode (single or multiplayer)
-  const [difficulty, setDifficulty] = useState(""); // Store the difficulty (easy, medium, hard)
-  const [roomCode, setRoomCode] = useState(""); // State to store the room code
+  const [mode, setMode] = useState(""); 
+  const [difficulty, setDifficulty] = useState(""); 
+  const [roomCode, setRoomCode] = useState(""); 
 
   // Logout User function
   const logoutUser = async () => {
     try {
       const response = await axios.post("http://localhost:5000/api/users/logout", {}, { withCredentials: true });
       if (response.status === 200) {
-        // Redirect to login page after successful logout
+        
         navigate("/login");
       }
     } catch (error) {
@@ -30,55 +30,55 @@ const Difficulty = () => {
     }
   };
 
-  // Fetch session data on component mount
+ 
   useEffect(() => {
     const fetchSessionData = async () => {
       try {
         const response = await axios.get("http://localhost:5000/api/users/session", {
-          withCredentials: true, // Ensure the session cookie is included
+          withCredentials: true, 
         });
 
-        // Successfully got session data
-        setUserName(response.data.name); // Set the user's name
-        console.log("Session ID: ", response.data.sessionId); // Log the session ID (if returned by the backend)
+        
+        setUserName(response.data.name); 
+        console.log("Session ID: ", response.data.sessionId); 
 
-        setLoading(false); // Set loading to false after the data is fetched
+        setLoading(false);
       } catch (err) {
         console.error("Error fetching session data:", err);
-        setLoading(false); // Set loading to false even if there's an error
-        navigate("/login"); // Redirect to login page if no session is found
+        setLoading(false); 
+        navigate("/login"); 
       }
     };
 
     setTimeout(() => {
-      fetchSessionData(); // Fetch session data after 3 seconds delay
-    }, 3000); // Simulate the loading time by delaying the fetch
+      fetchSessionData(); 
+    }, 3000); 
 
-    // Get the mode passed via state
+
     if (location.state && location.state.mode) {
       setMode(location.state.mode);
     }
   }, [navigate, location.state]);
 
-  // If still loading, show a loading state
+
   if (loading) {
-    return <Preloader />; // Show preloader for 3 seconds
+    return <Preloader />; 
   }
 
-  // Handle difficulty button click (auto navigate when clicked)
+
   const handleDifficultyChange = (difficulty) => {
     setDifficulty(difficulty);
-    navigate("/begin", { state: { mode, difficulty } }); // Passing mode and difficulty to the next page
+    navigate("/begin", { state: { mode, difficulty } }); 
   };
 
-  // Handle room code change (wait until arrow button is clicked)
+
   const handleRoomCodeChange = (e) => {
     setRoomCode(e.target.value);
   };
 
-  // Handle the arrow button click for joining the game
+
   const handleJoinGame = () => {
-    // Only navigate when the arrow button is clicked and a room code exists
+
     if (roomCode) {
       navigate("/begin", { state: { mode, difficulty, roomCode } });
     }
@@ -106,7 +106,7 @@ const Difficulty = () => {
           Selected Mode: <b>{mode === "single" ? "Single Player" : "Multiplayer"}</b>
         </h2>
 
-        {/* Difficulty selection buttons */}
+
         <h2 className="prompt-text">Select Difficulty</h2>
         <div className="button-container-3">
           <button className="start-button" onClick={() => handleDifficultyChange('Easy')}>
@@ -121,7 +121,7 @@ const Difficulty = () => {
         </div>
         <br />
 
-        {/* Multiplayer room code section */}
+
         {mode === "multiplayer" && (
           <div className="room-code-container">
             or
@@ -137,7 +137,7 @@ const Difficulty = () => {
                 className="room-code-input"
               />
               <button className="arrow-button" onClick={handleJoinGame}>
-                <FaArrowRight size={20} /> {/* Arrow icon */}
+                <FaArrowRight size={20} />
               </button>
             </div>
           </div>
@@ -148,7 +148,6 @@ const Difficulty = () => {
         </Link>
       </div>
 
-      {/* Question Icon at Bottom Right */}
       <div className="question-icon-container">
         <FaQuestionCircle size={32} />
       </div>

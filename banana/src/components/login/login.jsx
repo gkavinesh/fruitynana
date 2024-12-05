@@ -22,35 +22,41 @@ const Login = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Handle normal login (email/password)
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
     try {
-      // Normal login
+      // Send login request with email and password
       const { data } = await axios.post("http://localhost:5000/api/users/login", {
-        email,
+        email,    // Can be either email or username (depending on your backend)
         password,
       });
-
-      // Save token and userName from response
-      setToken(data.token); // Save JWT token for authentication
-      setUserName(data.user.name); // Set user's name for session
-
+  
+      // Save JWT token and user name from the response
+      setToken(data.token);  // Store the JWT token in state or localStorage
+      setUserName(data.name); // Store the username in state
+  
+      // Display success message
       toast.success("Login successful!", {
         position: "top-right",
         autoClose: 3000,
       });
-
+  
+      // Redirect to the dashboard after 3 seconds
       setTimeout(() => {
-        navigate("/dashboard"); // Redirect to the dashboard after login
-      }, 3000); // Redirect after 3 seconds
+        navigate("/dashboard");
+      }, 3000);
     } catch (error) {
-      toast.error(error.response?.data?.message || "Login failed!", {
+      // Handle error case (401 Unauthorized)
+      const errorMessage = error.response?.data?.message || "Login failed!";
+      toast.error(errorMessage, {
         position: "top-right",
         autoClose: 3000,
       });
     }
   };
+  
+
 
   // Handle Google OAuth login (redirect to backend for authentication)
   const handleGoogleLogin = () => {
@@ -93,7 +99,7 @@ const Login = () => {
             />
           </div>
 
-          <button type="submit" className="login-button">
+          <button type="submit" className="login-button" onClick={handleSubmit}>
             Sign In
           </button>
         </form>

@@ -47,26 +47,37 @@ exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
+    // Find user by email
     const user = await User.findOne({ email });
-
-    if (user && (await bcrypt.compare(password, user.password))) {
-      // Store user data in session
-      req.session.userId = user.id;
-      req.session.userName = user.name;  // Store user name in session
-
-      res.status(200).json({
-        _id: user.id,
-        name: user.name,
-        email: user.email,
-        token: generateToken(user.id), // Send token for frontend usage
-      });
-    } else {
-      res.status(401).json({ message: "Invalid email or password" });
+    if (!user) {
+      return res.status(401).json({ message: "Invalid email or password" });
     }
+
+    // Check if password is valid
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    // If user exists and password is correct, create session and send response
+    req.session.userId = user.id;
+    req.session.userName = user.name;
+
+    // Generate token for the user and send response to frontend
+    const token = generateToken(user.id); // Assuming you have a function for generating token
+
+    return res.status(200).json({
+      _id: user.id,
+      name: user.name,
+      email: user.email,
+      token: token, // Send JWT token to frontend
+    });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    console.error("Login error:", error);
+    return res.status(500).json({ message: "Server error" });
   }
 };
+
 
 // Google OAuth Login
 exports.googleLogin = async (req, res) => {

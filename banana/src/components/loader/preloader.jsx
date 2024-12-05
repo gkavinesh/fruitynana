@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./preloader.css";
 
 const Preloader = ({ onComplete }) => {
-  const [count, setCount] = useState(3); // Initial countdown value
+  const [count, setCount] = useState(3);
 
   useEffect(() => {
     if (count > 0) {
-      const timer = setTimeout(() => setCount(count - 1), 1000); // Countdown every second
-      return () => clearTimeout(timer); // Cleanup the timer
+      const timer = setTimeout(() => setCount(count - 1), 1000); 
+      return () => clearTimeout(timer); 
     } else {
-      onComplete(); // Trigger the callback when countdown reaches 0
+      onComplete(); 
     }
   }, [count, onComplete]);
 
