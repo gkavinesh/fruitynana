@@ -11,6 +11,7 @@ const userRoutes = require("./routes/userRoutes");
 const gameRoutes = require("./routes/gameRoutes");
 const User = require("./models/user.js"); // Assuming you have a User model
 const userController = require("./controllers/userController");
+const axios = require("axios");
 
 
 const app = express();
@@ -27,6 +28,35 @@ const corsOptions = {
   credentials: true, // Allow cookies to be sent
 };
 app.use(cors(corsOptions));
+
+// Endpoint to fetch a random quote from ZenQuotes API
+app.get('/api/quote', async (req, res) => {
+  try {
+    const response = await axios.get('https://zenquotes.io/api/random');
+    const quoteData = response.data[0];
+    res.json({ quote: quoteData.q, author: quoteData.a });
+  } catch (error) {
+    console.error("Error fetching quote:", error);
+    res.status(500).json({ message: "Failed to fetch quote" });
+  }
+});
+
+
+app.get('/api/emoji', async (req, res) => {
+  try {
+    // Fetch emoji from the Emoji API
+    const response = await axios.get(
+      'https://emoji-api.com/emojis/beaming-face-with-smiling-eyes?access_key=0f37513bc465acdc0053dfd105b4c1820b71900c'
+    );
+    
+    // Send the emoji character to the frontend
+    const emoji = response.data[0]?.character || '😀';  // Fallback to default emoji if the request fails
+    res.json({ emoji });
+  } catch (err) {
+    console.error("Error fetching emoji:", err);
+    res.status(500).json({ message: 'Error fetching emoji' });
+  }
+});
 
 // Passport Configuration
 passport.use(
