@@ -33,7 +33,10 @@ const Begin = () => {
         setUserName(response.data.name); // Set the user's name
         console.log("Session ID: ", response.data.sessionId); // Log the session ID (if returned by the backend)
 
-        setLoading(false); // Set loading to false after the data is fetched
+        // Delay the loading state change by 3 seconds
+        setTimeout(() => {
+          setLoading(false); // Set loading to false after 3 seconds
+        }, 3000);
       } catch (err) {
         console.error("Error fetching session data:", err);
         setLoading(false); // Set loading to false even if there's an error
@@ -125,5 +128,6 @@ const Begin = () => {
 };
 
 export default Begin;
+
 
 

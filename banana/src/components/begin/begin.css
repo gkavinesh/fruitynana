@@ -139,10 +139,10 @@
 
   .next-button-2 {
     position: absolute;
-    bottom: 300px;
-    right: 850px;
-    width: 200px;
-    height: 200px;
+    bottom: 400px;
+    right: 900px;
+    width: 100px;
+    height: 100px;
     border: 2px solid black;
     font-size: 10px;
     border-radius: 50%;
