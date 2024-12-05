@@ -19,12 +19,12 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
   },
-  scores: {
-    type: [Number], // Array to store multiple scores
-    default: [], // Default to an empty array
+  score: {
+    type: Number, // Changed from array to a single number to store the most recent score
+    default: 0, // Default to 0 if no score exists
   },
   highestScore: {
-    type: Number, // Optional: Track the highest score separately
+    type: Number, // Track the highest score separately
     default: 0,
   },
 });
@@ -39,5 +39,6 @@ userSchema.pre("save", async function (next) {
 });
 
 module.exports = mongoose.model("User", userSchema);
+
 
 
