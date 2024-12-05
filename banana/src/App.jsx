@@ -9,6 +9,7 @@ import Type from './components/type/type'
 import Difficulty from './components/difficulty/difficulty'
 import Begin from './components/begin/begin'
 import Explore from './components/explore/explore'
+import Score from './components/score/score'
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
       <Route path="/difficulty" element={<Difficulty />} />
       <Route path="/begin" element={<Begin />} />
       <Route path="/explore" element={<Explore />} />
+      <Route path="/score" element={<Score />} />
     </Routes>
   );
 };
