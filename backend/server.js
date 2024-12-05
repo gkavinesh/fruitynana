@@ -146,6 +146,8 @@ app.get("/api/users/session", (req, res) => {
   }
 });
 
+
+
 // User Routes
 app.use("/api/users", userRoutes);
 app.use("/api/game", gameRoutes);
